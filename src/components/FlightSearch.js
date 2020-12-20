@@ -5,7 +5,7 @@ import { format } from "date-fns";
 
 import DateFnsUtils from "@date-io/date-fns";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
-import { Button } from "@material-ui/core";
+import { Button, Switch } from "@material-ui/core";
 
 import { WrapperComponent, ContentComponent } from "./lib";
 
@@ -35,26 +35,39 @@ export const FlightSearch = () => {
   } = useForm();
   const fromDateVal = getValues("fromDate");
   const watchFrom = watch("fromDate", false);
+  const watchFlightType = watch("flightType", false);
 
   React.useEffect(() => {
     reset();
   }, [reset]);
 
   const onSubmit = (data) => {
-    // const {
-    //   from: { code: fromCode },
-    //   to: { code: toCode },
-    //   fromDate,
-    // } = data;
+    const {
+      from,
+      to,
+      fromDate,
+      toDate,
+      adults,
+      children,
+      infants,
+      flightType,
+    } = data;
 
-    // console.log(`${fromCode}-${toCode} / ${formatDateAsYMD(fromDate)}`);
-    console.log(data);
     // window.open(
-    //   `https://www.swiss.com/us/en/Book/Outbound/${fromCode}-${toCode}/from-${formatDateAsYMD(
-    //     fromDate
-    //   )}/adults-1/children-0/infants-0/class-economy/al-LX/sidmbvl`,
+    //   `https://www.swiss.com/us/en/Book/<flight_type>/<origin>-<destination>/from-<departure_date in YYYY-MM-DD format>/adults-<adult_amount>/children-<children_amount>/infants-<infants_amount>/class-<flight_class>/al-LX/sidmbvl`,
     //   "_blank"
     // );
+
+    window.open(
+      `https://www.swiss.com/us/en/Book/Outbound/${from}-${to}/from-${formatDateAsYMD(
+        fromDate
+      )}/${
+        flightType ? "to-" + formatDateAsYMD(toDate) + "/" : ""
+      }adults-${adults}/children-${children}/infants-${infants}/class-economy/al-LX/sidmbvl`,
+      "_blank"
+    );
+
+    console.log(data);
   };
 
   return (
@@ -88,11 +101,18 @@ export const FlightSearch = () => {
                 minDate={new Date()}
               />
 
+              <Switch
+                className="switch"
+                name="flightType"
+                inputRef={register}
+                color="primary"
+              />
+
               <DatePicker
                 name="toDate"
                 label="To Date"
                 control={control}
-                disabled={false}
+                disabled={!watchFlightType}
                 defaultValue={watchFrom}
                 minDate={fromDateVal}
               />
@@ -107,7 +127,7 @@ export const FlightSearch = () => {
             variant="contained"
             color="primary"
             type="submit">
-            Get country code
+            Search
           </Button>
         </ContentComponent>
       </form>

@@ -7,9 +7,8 @@ import TextField from "@material-ui/core/TextField";
 const CountryAutocomplete = ({ name, label, control, countries }) => {
   return (
     <Controller
-      render={(props) => (
+      render={({ onChange, value }) => (
         <Autocomplete
-          {...props}
           className="countryBox"
           fullWidth
           autoHighlight
@@ -24,12 +23,13 @@ const CountryAutocomplete = ({ name, label, control, countries }) => {
               </span>
             );
           }}
-          getOptionSelected={(option, value) => option === value}
+          // eslint-disable-next-line eqeqeq
+          getOptionSelected={(option, value) => option.code === value.code}
           renderInput={(params) => (
             <TextField {...params} required label={label} />
           )}
           onChange={(_, data) => {
-            return props.onChange(data);
+            return onChange(data.code);
           }}
         />
       )}

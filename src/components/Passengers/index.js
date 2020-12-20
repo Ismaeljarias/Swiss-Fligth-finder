@@ -5,6 +5,12 @@ import {
   addPassenger,
   changeCount,
   removePassenger,
+  addChild,
+  changeChildrenCount,
+  removeChild,
+  removeInfant,
+  addInfant,
+  changeInfantCount,
 } from "../../store/flightDuck";
 
 import { PassengerContainer, MainBox, InnerBoxContainer } from "../lib";
@@ -12,18 +18,22 @@ import { PassengerContainer, MainBox, InnerBoxContainer } from "../lib";
 const Passengers = ({ register }) => {
   const [open, setOpen] = React.useState(false);
   const dispatch = useDispatch();
-  const { adults, children } = useSelector((state) => state.flightReducer);
-
-  console.log(adults);
+  const { adults, children, infants } = useSelector(
+    (state) => state.flightReducer
+  );
 
   return (
     <PassengerContainer>
       <MainBox>
         <div className="passengerQ" onClick={() => setOpen(!open)}>
           <span className="group_quantity">
-            {adults} Adult, 0 Children, 0 Infants
+            {adults} Adult{adults > 1 ? "s" : null}, {children}{" "}
+            {children === 1 ? "Child" : children > 1 ? "Children" : "Children"},{" "}
+            {infants} Infant{infants > 1 ? "s" : null}
           </span>
-          <span className="passenger">1 Passenger</span>
+          <span className="passenger">
+            {adults + children + infants} Passenger
+          </span>
         </div>
         <React.Fragment>
           <InnerBoxContainer
@@ -60,7 +70,9 @@ const Passengers = ({ register }) => {
                 <small className="subtile">2-11 years</small>
               </div>
               <div className="inputBox">
-                <button type="button">-</button>
+                <button type="button" onClick={() => dispatch(removeChild())}>
+                  -
+                </button>
                 <input
                   name="children"
                   max="40"
@@ -68,10 +80,40 @@ const Passengers = ({ register }) => {
                   step="1"
                   type="number"
                   ref={register}
-                  defaultValue={children}
+                  value={children}
+                  onChange={(e) =>
+                    dispatch(changeChildrenCount(e.target.value))
+                  }
                 />
 
-                <button type="button">+</button>
+                <button type="button" onClick={() => dispatch(addChild())}>
+                  +
+                </button>
+              </div>
+            </div>
+            <div className="quantityContainer">
+              <div className="textbox">
+                <span className="title">Infants</span>
+                <small className="subtile">0-1 years</small>
+              </div>
+              <div className="inputBox">
+                <button type="button" onClick={() => dispatch(removeInfant())}>
+                  -
+                </button>
+                <input
+                  name="infants"
+                  max="40"
+                  min="0"
+                  step="1"
+                  type="number"
+                  ref={register}
+                  value={infants}
+                  onChange={(e) => dispatch(changeInfantCount(e.target.value))}
+                />
+
+                <button type="button" onClick={() => dispatch(addInfant())}>
+                  +
+                </button>
               </div>
             </div>
             <div className="closeButton" onClick={() => setOpen(!open)}>

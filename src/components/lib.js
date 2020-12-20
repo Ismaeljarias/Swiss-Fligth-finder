@@ -66,11 +66,17 @@ export const ContentComponent = styled.div`
   }
 
   .container {
+    position: relative;
     width: 33.33%;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 10px;
+  }
+
+  .switch {
+    position: absolute;
+    top: -20px;
   }
 
   @media screen and (max-width: 1065px) {
@@ -90,7 +96,8 @@ export const PassengerContainer = styled.div`
 
   min-height: 50px;
 
-  background-color: olive;
+  background-color: lightgray;
+  border: 1px solid grey;
 `;
 
 export const MainBox = styled.div`
