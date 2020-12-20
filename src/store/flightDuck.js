@@ -72,7 +72,7 @@ export default function flightReducer(state = initialState, action) {
     case REMOVE_INFANT:
       return {
         ...state,
-        infants: state.infants <= 1 ? (state.infants = 1) : state.infants - 1,
+        infants: state.infants <= 0 ? (state.infants = 0) : state.infants - 1,
       };
 
     default:

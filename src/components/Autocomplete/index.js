@@ -3,13 +3,21 @@ import { Controller } from "react-hook-form";
 
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import TextField from "@material-ui/core/TextField";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    textTransform: "capitalize",
+  },
+}));
 
 const CountryAutocomplete = ({ name, label, control, countries }) => {
+  const classes = useStyles();
   return (
     <Controller
       render={({ onChange, value }) => (
         <Autocomplete
-          className="countryBox"
+          className={classes.root}
           fullWidth
           autoHighlight
           options={countries}

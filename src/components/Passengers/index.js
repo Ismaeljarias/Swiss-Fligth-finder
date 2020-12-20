@@ -21,6 +21,21 @@ const Passengers = ({ register }) => {
   const { adults, children, infants } = useSelector(
     (state) => state.flightReducer
   );
+  const wrapperRef = React.useRef(null);
+
+  React.useEffect(() => {
+    window.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      window.removeEventListener("mousedown", handleClickOutside);
+    };
+  });
+
+  const handleClickOutside = (event) => {
+    const { current: wrap } = wrapperRef;
+    if (wrap && !wrap.contains(event.target)) {
+      setOpen(false);
+    }
+  };
 
   return (
     <PassengerContainer>
@@ -37,6 +52,7 @@ const Passengers = ({ register }) => {
         </div>
         <React.Fragment>
           <InnerBoxContainer
+            ref={wrapperRef}
             style={open ? { visibility: "visible" } : { visibility: "hidden" }}>
             <div className="quantityContainer">
               <div className="textbox">

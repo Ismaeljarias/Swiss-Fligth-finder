@@ -37,6 +37,22 @@ export const GlobalStyle = createGlobalStyle`
       color: var(--white);
     }
 
+    input { 
+      text-transform: capitalize;
+    }
+    ::-webkit-input-placeholder { 
+        text-transform: none;
+    }
+    :-moz-placeholder { 
+        text-transform: none;
+    }
+    ::-moz-placeholder { 
+        text-transform: none;
+    }
+    :-ms-input-placeholder { 
+        text-transform: none;
+    }
+
   }
 
 

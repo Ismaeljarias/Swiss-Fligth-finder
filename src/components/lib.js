@@ -79,6 +79,10 @@ export const ContentComponent = styled.div`
     top: -20px;
   }
 
+  .options {
+    text-transform: capitalize;
+  }
+
   @media screen and (max-width: 1065px) {
     .container {
       width: 100%;
@@ -178,6 +182,7 @@ export const InnerBoxContainer = styled.div`
     width: 30px;
     height: 36px;
     vertical-align: middle;
+    cursor: pointer;
   }
 
   input {
