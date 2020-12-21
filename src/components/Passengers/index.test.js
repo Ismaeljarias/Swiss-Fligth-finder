@@ -1,6 +1,5 @@
 import React from "react";
-import { render, cleanup, screen } from "@testing-library/react";
-import { useForm } from "react-hook-form";
+import { render, cleanup, screen, fireEvent } from "@testing-library/react";
 
 import { Provider } from "react-redux";
 import store from "../../store/store";
@@ -25,7 +24,7 @@ describe("<Passenger /> Tests", () => {
 
   test("adults input should start in 1 and decrement button disabled", () => {
     const register = jest.fn();
-    const { getByTestId } = render(<Passengers register={register} />, {
+    render(<Passengers register={register} />, {
       wrapper: Wrapper,
     });
     const adults_input = screen.getByLabelText("adults-input");
@@ -35,9 +34,9 @@ describe("<Passenger /> Tests", () => {
     expect(adults_decrement).toBeDisabled();
   });
 
-  test("should addPassenger increment Adults Passengers", () => {
+  test("should addPassenger increment Adults Passengers", async () => {
     const register = jest.fn();
-    const { getByTestId } = render(<Passengers register={register} />, {
+    render(<Passengers register={register} />, {
       wrapper: Wrapper,
     });
     const adults_input = screen.getByLabelText("adults-input");
@@ -49,12 +48,24 @@ describe("<Passenger /> Tests", () => {
 
   test("should removePassenger decrement Adults Passengers", () => {
     const register = jest.fn();
-    const { getByTestId } = render(<Passengers register={register} />, {
+    render(<Passengers register={register} />, {
       wrapper: Wrapper,
     });
     const adults_input = screen.getByLabelText("adults-input");
 
     store.dispatch(removePassenger());
     expect(adults_input.value).toBe("1");
+  });
+
+  test("should adults input can change it value", () => {
+    const register = jest.fn();
+    render(<Passengers register={register} />, {
+      wrapper: Wrapper,
+    });
+
+    const input = screen.getByLabelText("adults-input");
+
+    fireEvent.change(input, { target: { value: "2" } });
+    expect(input.value).toEqual("2");
   });
 });
