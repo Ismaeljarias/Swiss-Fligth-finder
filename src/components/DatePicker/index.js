@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Controller } from "react-hook-form";
 
 import { KeyboardDatePicker } from "@material-ui/pickers";
@@ -30,6 +31,15 @@ const DatePicker = ({
       defaultValue={defaultValue || null}
     />
   );
+};
+
+DatePicker.propTypes = {
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  control: PropTypes.object.isRequired,
+  minDate: PropTypes.object,
+  defaultValue: PropTypes.any.isRequired,
+  disabled: PropTypes.bool.isRequired,
 };
 
 export default DatePicker;

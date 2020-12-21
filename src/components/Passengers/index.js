@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -175,6 +176,10 @@ const Passengers = ({ register }) => {
       </MainBox>
     </PassengerContainer>
   );
+};
+
+Passengers.propTypes = {
+  register: PropTypes.func.isRequired,
 };
 
 export default Passengers;

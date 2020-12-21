@@ -1,23 +1,15 @@
 import React from "react";
 import { Controller } from "react-hook-form";
+import PropTypes from "prop-types";
 
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import TextField from "@material-ui/core/TextField";
-import { makeStyles } from "@material-ui/core/styles";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    textTransform: "capitalize",
-  },
-}));
 
 const CountryAutocomplete = ({ name, label, control, countries }) => {
-  const classes = useStyles();
   return (
     <Controller
       render={({ onChange, value }) => (
         <Autocomplete
-          className={classes.root}
           fullWidth
           autoHighlight
           options={countries}
@@ -47,6 +39,13 @@ const CountryAutocomplete = ({ name, label, control, countries }) => {
       defaultValue={null}
     />
   );
+};
+
+CountryAutocomplete.propType = {
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  control: PropTypes.object.isRequired,
+  countries: PropTypes.array.isRequired,
 };
 
 export default CountryAutocomplete;

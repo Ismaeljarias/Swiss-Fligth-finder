@@ -53,10 +53,8 @@ export const FlightSearch = () => {
       flightType,
     } = data;
 
-    // window.open(
-    //   `https://www.swiss.com/us/en/Book/<flight_type>/<origin>-<destination>/from-<departure_date in YYYY-MM-DD format>/adults-<adult_amount>/children-<children_amount>/infants-<infants_amount>/class-<flight_class>/al-LX/sidmbvl`,
-    //   "_blank"
-    // );
+    // Since this can be reach with a simple JS functionality I decide to keep it simple
+    // and use a native function instead of React router or reach for the redirection
 
     window.open(
       `https://www.swiss.com/us/en/Book/Outbound/${from}-${to}/from-${formatDateAsYMD(
@@ -66,9 +64,9 @@ export const FlightSearch = () => {
       }adults-${adults}/children-${children}/infants-${infants}/class-economy/al-LX/sidmbvl`,
       "_blank"
     );
-
-    console.log(data);
   };
+
+  // For this homework I used Material ui so it is easy to build the components and customize it
 
   return (
     <WrapperComponent>
