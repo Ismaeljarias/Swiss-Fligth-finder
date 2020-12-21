@@ -75,8 +75,8 @@ export const ContentComponent = styled.div`
   }
 
   .switch {
-    position: absolute;
-    top: -20px;
+    /* position: absolute;
+    top: -20px; */
   }
 
   .options {
