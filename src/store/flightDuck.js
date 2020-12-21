@@ -3,7 +3,6 @@ const initialState = {
   adults: 1,
   children: 0,
   infants: 0,
-  total_count: 40,
 };
 
 const CHANGE_COUNT = "CHANGE_COUNT";
@@ -27,19 +26,19 @@ export default function flightReducer(state = initialState, action) {
         adults:
           action.payload <= 1
             ? (state.adults = 1)
-            : action.payload > 40
+            : action.payload >= 40
             ? (state.adults = 40)
             : action.payload,
       };
     case CHANGE_CHILDREN_COUNT:
       return {
         ...state,
-        children: action.payload > 39 ? (state.children = 39) : action.payload,
+        children: action.payload >= 39 ? (state.children = 39) : action.payload,
       };
     case CHANGE_INFANT_COUNT:
       return {
         ...state,
-        infants: action.payload > 39 ? (state.infants = 39) : action.payload,
+        infants: action.payload >= 39 ? (state.infants = 39) : action.payload,
       };
     case ADD_ADULT:
       return {
@@ -51,12 +50,12 @@ export default function flightReducer(state = initialState, action) {
       return {
         ...state,
         children:
-          state.children >= 40 ? (state.children = 40) : state.children + 1,
+          state.children >= 39 ? (state.children = 39) : state.children + 1,
       };
     case ADD_INFANT:
       return {
         ...state,
-        infants: state.infants >= 40 ? (state.infants = 40) : state.infants + 1,
+        infants: state.infants >= 39 ? (state.infants = 39) : state.infants + 1,
       };
     case REMOVE_CHILD:
       return {
@@ -84,20 +83,20 @@ export default function flightReducer(state = initialState, action) {
 export const changeCount = (count) => (dispatch) => {
   dispatch({
     type: CHANGE_COUNT,
-    payload: count,
+    payload: parseInt(count),
   });
 };
 export const changeChildrenCount = (count) => (dispatch) => {
   dispatch({
     type: CHANGE_CHILDREN_COUNT,
-    payload: count,
+    payload: parseInt(count),
   });
 };
 
 export const changeInfantCount = (count) => (dispatch) => {
   dispatch({
     type: CHANGE_INFANT_COUNT,
-    payload: count,
+    payload: parseInt(count),
   });
 };
 

@@ -37,8 +37,10 @@ const Passengers = ({ register }) => {
     }
   };
 
+  const total_count = parseInt(adults) + parseInt(children) + parseInt(infants);
+
   return (
-    <PassengerContainer>
+    <PassengerContainer data-testid="passenger-container">
       <MainBox>
         <div className="passengerQ" onClick={() => setOpen(!open)}>
           <span className="group_quantity">
@@ -46,9 +48,7 @@ const Passengers = ({ register }) => {
             {children === 1 ? "Child" : children > 1 ? "Children" : "Children"},{" "}
             {infants} Infant{infants > 1 ? "s" : null}
           </span>
-          <span className="passenger">
-            {adults + children + infants} Passenger
-          </span>
+          <span className="passenger">{total_count} Passenger</span>
         </div>
         <React.Fragment>
           <InnerBoxContainer
@@ -61,21 +61,34 @@ const Passengers = ({ register }) => {
               </div>
               <div className="inputBox">
                 <button
+                  data-testid="adults-decrement"
+                  disabled={adults === 1 ? true : false}
                   type="button"
                   onClick={() => dispatch(removePassenger())}>
                   -
                 </button>
                 <input
+                  aria-label="adults-input"
                   name="adults"
+                  maxLength="2"
                   max="40"
                   min="1"
                   step="1"
                   type="number"
                   ref={register}
                   value={adults}
-                  onChange={(e) => dispatch(changeCount(e.target.value))}
+                  onChange={(e) =>
+                    e.target.value
+                      ? dispatch(changeCount(e.target.value))
+                      : false
+                  }
                 />
-                <button type="button" onClick={() => dispatch(addPassenger())}>
+
+                <button
+                  data-testid="adults-increment"
+                  disabled={adults === 40 ? true : false}
+                  type="button"
+                  onClick={() => dispatch(addPassenger())}>
                   +
                 </button>
               </div>
@@ -86,7 +99,11 @@ const Passengers = ({ register }) => {
                 <small className="subtile">2-11 years</small>
               </div>
               <div className="inputBox">
-                <button type="button" onClick={() => dispatch(removeChild())}>
+                <button
+                  data-testid="children-decrement"
+                  disabled={children === 0 ? true : false}
+                  type="button"
+                  onClick={() => dispatch(removeChild())}>
                   -
                 </button>
                 <input
@@ -98,11 +115,17 @@ const Passengers = ({ register }) => {
                   ref={register}
                   value={children}
                   onChange={(e) =>
-                    dispatch(changeChildrenCount(e.target.value))
+                    e.target.value
+                      ? dispatch(changeChildrenCount(e.target.value))
+                      : false
                   }
                 />
 
-                <button type="button" onClick={() => dispatch(addChild())}>
+                <button
+                  data-testid="children-increment"
+                  disabled={children === 39 ? true : false}
+                  type="button"
+                  onClick={() => dispatch(addChild())}>
                   +
                 </button>
               </div>
@@ -113,7 +136,11 @@ const Passengers = ({ register }) => {
                 <small className="subtile">0-1 years</small>
               </div>
               <div className="inputBox">
-                <button type="button" onClick={() => dispatch(removeInfant())}>
+                <button
+                  data-testid="infants-decrement"
+                  disabled={infants === 0 ? true : false}
+                  type="button"
+                  onClick={() => dispatch(removeInfant())}>
                   -
                 </button>
                 <input
@@ -124,10 +151,18 @@ const Passengers = ({ register }) => {
                   type="number"
                   ref={register}
                   value={infants}
-                  onChange={(e) => dispatch(changeInfantCount(e.target.value))}
+                  onChange={(e) =>
+                    e.target.value
+                      ? dispatch(changeInfantCount(e.target.value))
+                      : false
+                  }
                 />
 
-                <button type="button" onClick={() => dispatch(addInfant())}>
+                <button
+                  data-testid="infants-increment"
+                  disabled={infants === 39 ? true : false}
+                  type="button"
+                  onClick={() => dispatch(addInfant())}>
                   +
                 </button>
               </div>
