@@ -86,7 +86,7 @@ export const FlightSearch = () => {
             <div className="container">
               <DatePicker
                 name="fromDate"
-                label="From Date"
+                label="Outbound"
                 control={control}
                 disabled={false}
                 defaultValue={new Date()}
@@ -102,7 +102,7 @@ export const FlightSearch = () => {
 
               <DatePicker
                 name="toDate"
-                label="To Date"
+                label="ReturnFlight"
                 control={control}
                 disabled={!watchFlightType}
                 defaultValue={watchFrom}
