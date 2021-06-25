@@ -57,7 +57,6 @@ export const ContentComponent = styled.div`
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-
   background-color: lightblue;
 
   .break {
@@ -67,7 +66,7 @@ export const ContentComponent = styled.div`
 
   .container {
     position: relative;
-    width: 33.33%;
+    flex: 1 1 20%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -102,6 +101,12 @@ export const PassengerContainer = styled.div`
 
   background-color: lightgray;
   border: 1px solid grey;
+
+  @media screen and (max-width: 768px) {
+    display: block;
+    width: 100%;
+    margin-top: 30px;
+  }
 `;
 
 export const MainBox = styled.div`
@@ -155,7 +160,7 @@ export const InnerBoxContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
+    padding: 10px;
     height: 62px;
     box-sizing: border-box;
     border: 1px solid white;
@@ -168,7 +173,9 @@ export const InnerBoxContainer = styled.div`
   }
 
   .inputBox {
+    /* display: flex; */
   }
+
   small {
     color: #909090;
   }

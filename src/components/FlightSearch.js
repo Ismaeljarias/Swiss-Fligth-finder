@@ -25,14 +25,8 @@ export function formatDateAsYMD(date) {
 }
 
 export const FlightSearch = () => {
-  const {
-    control,
-    handleSubmit,
-    getValues,
-    watch,
-    reset,
-    register,
-  } = useForm();
+  const { control, handleSubmit, getValues, watch, reset, register } =
+    useForm();
   const fromDateVal = getValues("fromDate");
   const watchFrom = watch("fromDate", false);
   const watchFlightType = watch("flightType", false);

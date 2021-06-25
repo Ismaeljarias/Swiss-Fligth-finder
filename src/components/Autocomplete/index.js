@@ -29,7 +29,7 @@ const CountryAutocomplete = ({ name, label, control, countries }) => {
             <TextField {...params} required label={label} />
           )}
           onChange={(_, data) => {
-            return onChange(data.code);
+            return onChange(data?.code);
           }}
         />
       )}
